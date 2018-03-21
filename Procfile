@@ -1,1 +1,1 @@
-web: racket -l sample-heroku-app/server
+web: racket -l deudatec/server
