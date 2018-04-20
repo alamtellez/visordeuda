@@ -1,0 +1,25 @@
+#lang racket
+
+
+; Declarar variables
+(define units 450)
+(define num_semestres 18)
+(define num_meses (* num_semestres 12))
+(define porcentaje 0.25)
+;Definir el costo del primer semestre a pagar
+(define (costo_semestre inicial unidades_iniciales total_unidades)
+  (*(/ inicial unidades_iniciales) (/ total_unidades 9)))
+;Definir el costo del primer semestre
+(define semestre (costo_semestre ref_semestre ref_unidades units))
+;Calcular el total que costará la carrera con intereses
+(define total_c_intereses (* semestre 9 (+ 1 rate_anual)))
+;Calcular el financiamiento correspondiente a el porcentaje por el total del costo de la carrera
+(define financiamiento_inicial (* total_c_intereses porcentaje))
+;Calcular el la deuda semestral de acuerdo al plazo al que se quiera ir el alumno 
+(define deuda_semestral_inicial (/ financiamiento_inicial num_semestres))
+; Calcular el costo del semestre de acuerdo a las unidades de cada carrera
+;(define a_pagar (a_pagar_fun (list deuda_semestral) rate_semestral num_semestres))
+;(define pagos (pagos_fun 108 '() a_pagar rate_mensual 0))
+;(define todo_a_pagar (todo_a_pagar_fun '() 108 a_pagar rate_mensual pagos 0))
+;(define interes (interes_fun '() 108 a_pagar todo_a_pagar rate_mensual 0))
+;(define amortizacion (amortizacion_fun '() interes pagos 108 0))

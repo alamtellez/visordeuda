@@ -1,0 +1,284 @@
+.container {
+  margin: 0 auto;
+  max-width: 3460px;
+  width: 90%;
+}
+@media only screen and (min-width: 601px)
+  .container {
+    width: 85%;
+}
+@media only screen and (min-width: 993px)
+  .container {
+    width: 70%;
+}
+
+@font-face {
+  font-family: proxima;
+  src: url(proxima-nova.woff);
+}
+
+@font-face {
+  font-family: proxima-bold;
+  src: url(proxima-bold.woff);
+}
+
+
+ul li {
+  display: inline-block;
+}
+.logos {
+  margin-top: 120px;
+}
+
+nav {
+  -webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+nav ul li a{
+  padding: 0 50px
+}
+
+.nav-a {
+  color: black;
+}
+
+.nav-a.active {
+  color: #0975d1 !important;
+}
+
+#index-left {
+  background:linear-gradient(0deg,rgba(9, 117, 209, 0.6),rgba(9, 117, 209, 0.6)),url('../img/index-left.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 550px;
+  height: 550px;
+  display: flex;
+  align-items: flex-end;
+}
+
+#index-right {
+  background:linear-gradient(0deg,rgba(32, 45, 56, 0.6),rgba(32, 45, 56, 0.6)),url('../img/index-right.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 550px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: right;
+}
+
+#sidenav-overlay{
+  z-index: 1;
+}
+
+.half-section {
+  min-height: 535px;
+}
+
+.page-section-index {
+  margin-top: 2em;
+  margin-bottom: 8em;
+}
+.page-section {
+  margin-top: 5em;
+}
+
+.left-bottom {
+  bottom: 0;
+  left: 0;
+  padding: 24px;
+}
+.right-bottom {
+  bottom: 0;
+  right: 0;
+  padding: 24px;
+}
+
+body {
+  background-image: url('../img/fondo.svg'),url('../img/fondo4.svg');
+  background-repeat: repeat;
+  font-family: proxima;
+}
+.w3-input{
+  background-color: #ffffff !important ;
+  color: black !important ;
+  padding-left: 10px !important ;
+  margin-left: -10px !important ;
+  width: 100% !important;
+  border-bottom: none !important ;
+}
+.w3-input:focus{
+    border-bottom: none !important ;
+    box-shadow: none !important ;
+
+}
+
+#section-title{
+  color: white;
+  border-bottom-style: solid;
+  border-color: white;
+}
+
+#section-title-normal {
+  color: black;
+  border-bottom-style: solid;
+  border-color: #2A7DE1;
+}
+
+#blue {
+  background:linear-gradient(0deg,rgba(44, 122, 216, 0.85),rgba(44, 122, 216, 0.85)),url('../img/foto3.svg');
+  background-size: cover;
+}
+
+#clients {
+  background:linear-gradient(0deg,rgba(32, 42, 50, 0.85),rgba(32, 42, 50, 0.85)),url('../img/clients.jpg');
+  background-size: cover;
+  height: 535px;
+}
+
+#tools {
+  background:linear-gradient(0deg,rgba(44, 122, 216, 0.85),rgba(44, 122, 216, 0.85)),url('../img/tools.jpg');
+  background-size: cover;
+  height: 535px;
+}
+
+#dark-blue {
+  background:linear-gradient(0deg,rgba(32, 42, 50, 0.85),rgba(32, 42, 50, 0.85)),url('../img/circuito.jpg');
+  background-size: cover;
+  min-height: 450px;
+}
+
+#dark-blue-contact {
+  background:linear-gradient(0deg,rgba(32, 42, 50, 0.85),rgba(32, 42, 50, 0.85)),url('../img/logo4.svg');
+  background-size: cover;
+}
+
+#blue-computing {
+  background:linear-gradient(0deg,rgba(44, 122, 216, 0.85),rgba(44, 122, 216, 0.85)),url('../img/quantum-computer.jpg');
+  background-size: cover;
+}
+
+@media only screen and (min-width: 0px) {
+  #thankyou_message{
+    text-align: center;
+  }
+  #info-contacto {
+    text-align: center;
+  }
+  #index-left a {
+    display: none;
+  }
+  #index-right a {
+    display: none;
+  }
+  .right-bottom {
+    padding: 3px;
+  }
+  .left-bottom {
+    padding: 3px;
+  }
+  #index-left h4, #index-right h4 {
+    font-family: proxima-bold;
+    font-size: 6.6vw;
+  }
+  .half-section h5 {
+    font-family: proxima-bold;
+    font-size: 1.4rem;
+  }
+  #about p {
+    font-size: 14px;
+    line-height: 2;
+  }
+  .page-section h5, .nav-a {
+    font-family: proxima-bold;
+  }
+
+}
+@media only screen and (min-width: 601px) {
+  #thankyou_message{
+    text-align: left;
+  }
+  #about p {
+    font-size: 14px;
+    line-height: 2;
+  }
+  #half-about p {
+    font-size: 14px !important;
+    line-height: 2;
+  }
+  #index-left a {
+    display: block;
+  }
+  #index-right a {
+    display: block;
+  }
+  #info-contacto{
+    text-align: right;
+  }
+  #menu-end{
+    display: block;
+  }
+  #index-left h4, #index-right h4 {
+    font-family: proxima-bold;
+    font-size: 2.3rem;
+  }
+  .right-bottom {
+    padding: 24px;
+  }
+  .left-bottom {
+    padding: 24px;
+  }
+  .half-section h5 {
+    font-family: proxima-bold;
+    font-size: 1.4rem;
+  }
+  .page-section h5, .nav-a {
+    font-family: proxima-bold;
+  }
+
+}
+
+
+@media only screen and (min-width: 992px) {
+  #thankyou_message{
+    text-align: left;
+  }
+  #about p {
+    font-size: 18px;
+    line-height: 2;
+  }
+  #half-about p {
+    font-size: 18px;
+    line-height: 4;
+  }
+  #index-left a {
+    display: block;
+  }
+  #index-right a {
+    display: block;
+  }
+  #info-contacto{
+    text-align: right;
+  }
+  #menu-end{
+    display: block;
+  }
+  #index-left h4, #index-right h4 {
+    font-family: proxima-bold;
+    font-size: 2.3rem;
+  }
+  .right-bottom {
+    padding: 24px;
+  }
+  .left-bottom {
+    padding: 24px;
+  }
+  .half-section h5 {
+    font-family: proxima-bold;
+    font-size: 1.64rem;
+  }
+  .page-section h5, .nav-a {
+    font-family: proxima-bold;
+  }
+}

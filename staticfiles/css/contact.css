@@ -1,0 +1,42 @@
+
+@font-face {
+  font-family: proxima;
+  src: url(proxima-nova.woff);
+}
+
+@font-face {
+  font-family: proxima-bold;
+  src: url(proxima-bold.woff);
+}
+
+body {
+  font-family: proxima;
+}
+
+#section-contact {
+  height: 100vh;
+  margin: 0 0;
+  padding: 0 0;
+  background:linear-gradient(0deg,rgba(32, 42, 50, 0.85),rgba(32, 42, 50, 0.85)),url('../img/logo4.svg');
+  background-size: cover;
+}
+
+#section-title{
+  color: white;
+  border-bottom-style: solid;
+  border-color: white;
+}
+
+.w3-input{
+  background-color: #ffffff !important ;
+  color: black !important ;
+  padding-left: 10px !important ;
+  margin-left: -10px !important ;
+  width: 100% !important;
+  border-bottom: none !important ;
+}
+.w3-input:focus{
+    border-bottom: none !important ;
+    box-shadow: none !important ;
+
+}
