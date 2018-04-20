@@ -2,6 +2,7 @@
 
 ;Declaradas aquí
 (define ref_semestre 116132)
+(define ref_interes_inicial 0.05)
 (define ref_unidades 48)
 (define rate_anual 0.085)
 (define rate_semestral (/ rate_anual 2))
@@ -13,6 +14,13 @@
     [(= acc 1) li]
     [else (a_pagar_fun (append li (list (* (last li) (+ 1 rate)))) rate (- acc 1))]))
 
+
+;Calculo del total acumulado al salir de la carrera
+(define (total_al_finalizar inicial interes acc)
+  (printf "~a\n" inicial)
+  (cond
+    [(= acc 9) inicial]
+    [else (total_al_finalizar (+ inicial (* inicial (+ 1 interes))) (+ interes 0.0025) (+ acc 1))]))
 
 ;Calculo de pagos con intereses
 (define (pagos_fun meses li a_pagar rate acc)

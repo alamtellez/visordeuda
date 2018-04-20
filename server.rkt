@@ -31,9 +31,26 @@
               (div ((class "row"))
                 (form ([method "POST"] [action "/print-form-data"] [class "col s12 m12"])
                   (div ((class "row"))
-                    (div ((class "input-field col s12 m4"))
-                      (select ([name "units"])
-                       (option ((value "") (selected "true") ) "Choose your option")
+                    (div ((class "input-field col s12 m3"))
+                      (select ([name "inicial"] [required "true"])
+                       (option ((value "") (selected "true") ) "Año de ingreso")
+                            (option ([value "90995"]) "2013")
+                            (option ([value "94659"]) "2014")
+                            (option ([value "98952"]) "2015")
+                            (option ([value "103869"]) "2016")
+                            (option ([value "109567"]) "2017")
+                            (option ([value "116132"]) "2018")
+                            (option ([value "123332"]) "2019")
+                            (option ([value "131349"]) "2020")
+                            (option ([value "140412"]) "2021")
+                            )
+                      (label "Carrera" )
+                    )
+                    (div ((class "input-field col s12 m3"))
+                      (select ([name "units"] [required "true"])
+                       (option ((value "") (selected "true") ) "¿Qué carrera estudias?")
+                            (option ([value "446"]) "ISC")
+                            (option ([value "450"]) "ISD")
                             (option ([value "450"]) "IC")
                             (option ([value "498"]) "ARQ")
                             (option ([value "450"]) "IA")
@@ -57,14 +74,14 @@
                       (label "Carrera" )
                     )
                   
-                    (div ((class "input-field col s12 m4"))
+                    (div ((class "input-field col s12 m3"))
                       (i ((class "mdi-action-account-circle prefix")))
-                      (input ((id "icon_") (type "number") (name "percentage") (min "0") (max "100")) )
+                      (input ((id "icon_") (type "number") (name "percentage") (min "0") (max "100") (required "true")) )
                       (label ((for "icon_")) "Porcentaje de beca financiamiento (en enteros Ej. 50)")
                     )
-                    (div ((class "input-field col s12 m4"))
-                      (select ([name "meses"])
-                       (option ((value "") (selected "true") ) "Choose your option")
+                    (div ((class "input-field col s12 m3"))
+                      (select ([name "meses"] [required "true"])
+                       (option ((value "") (selected "true") ) "Elige una opción")
                             (option ([value "12"]) "1 Año")
                             (option ([value "24"]) "2 Años")
                             (option ([value "36"]) "3 Años")
@@ -75,7 +92,7 @@
                             (option ([value "96"]) "8 Años")
                             (option ([value "108"]) "9 Años")
                             )
-                      (label "¿A cuántos años?" )
+                      (label "¿A cuántos años te la quieres llevar?" )
                     )
                   )
                   (button ((class "btn waves-effect waves-light right") (type "submit")) "Enviar")
@@ -116,24 +133,27 @@ $('select').material_select();
      ; convert to an alist:
      (define form-data (form-urlencoded->alist post-data))
 
-     ; pull out the user and comment:
+     ; pull out the units, percentage of tuition, the amount of months that it is going to take and the initial cost
      (define units (string->number(cdr (assq 'units form-data))))
      (define porcentaje (/ (string->number (cdr (assq 'percentage form-data))) 100))
      (define meses (string->number(cdr (assq 'meses form-data))))
+     (define inicial (string->number(cdr (assq 'inicial form-data))))
+     
      
      
      ; Declarar variables
      (define num_semestres_completo (/ meses 6))
      
-     ;(define porcentaje 0.25)
      ;Definir el costo del primer semestre a pagar
-     (define (costo_semestre inicial unidades_iniciales total_unidades)
-       (*(/ inicial unidades_iniciales) (/ total_unidades 9)))
+     (define (costo_semestre inicial_arg unidades_iniciales total_unidades)
+       (* (/ inicial_arg unidades_iniciales) (/ total_unidades 9)))
      ;Definir el costo del primer semestre
-     (define semestre (costo_semestre ref_semestre ref_unidades units))
+     (define semestre (costo_semestre inicial ref_unidades units))
 
      ;Calcular el total que costará la carrera con intereses
      (define total_c_intereses (* semestre 9 (+ 1 rate_anual)))
+     ;(define total_c_intereses (total_al_finalizar semestre ref_interes_inicial 0))
+     (printf "~a" total_c_intereses)
      ;Calcular el financiamiento correspondiente a el porcentaje por el total del costo de la carrera
      (define financiamiento_inicial (* total_c_intereses porcentaje))
      ;Calcular el la deuda semestral de acuerdo al plazo al que se quiera ir el alumno 
@@ -158,23 +178,42 @@ $('select').material_select();
          
             (div ([class "row"])
                (div ([class  "card col s12 m12 center-align"])
-                   (h5 "Tomando como referencia el costo de semestre de Ene-May 2018")
-                   (h6 "Recién graduado habrás acumulado una deuda de: " ,(format "~a" financiamiento_inicial))
-                   (h6 "Cumpliendo el plazo de ", (format "~a" (/ meses 12)), " años, habrás acumulado: " ,(format "~a" (last comportamiento_pagos_completo)), " para el final")
+                   (a ([class "waves-effect waves-light btn modal-trigger"] [href "#modal1"]) "FAQ Y Consejos")
+                   (div ([id "modal1"] [class "modal modal-fixed-footer"])
+                        (div ([class "modal-content left-align"])
+                             (h4 "FAQs Y Consejos")
+                             (p (strong "¿Qué es la amortización?"))
+                             (p "A bunch of text")
+                             (p (strong "¿Cómo aumenta el precio del crédito?"))
+                             (p "De acuerdo a las unidades totales de tu carrera, se toma como referencia el precio de la colegiatura del
+                                  año en que ingresaste y a partir de ahí se calcula el acumulado al final de la carrera, con este numero
+                                  ")
+                             (p (strong "¿Qué es la amortización?"))
+                             (p "A bunch of text")
+                             (p (strong "¿Qué es la amortización?"))
+                             (p "A bunch of text")
+                        )
+                        (div ([class "modal-footer"])
+                             (a ([href "#!"] [class "modal-action modal-close waves-effect waves-green btn-flat"]) "Ok")
+                        )
+                   )
+                   (h5 "Recién graduado habrás acumulado una deuda de: $" ,(format "~a" financiamiento_inicial))
+                   (h5 "Cumpliendo el plazo de ", (format "~a" (/ meses 12)), " años, habrás acumulado: $" ,(format "~a" (last comportamiento_pagos_completo)), " para el final")
                    (h4 ([style "color: red;"]) "ESO ES " ,(format "~a" (*(/ (last comportamiento_pagos_completo) financiamiento_inicial) 100)), "% DEL COSTO INICIAL")
                )
-              (div ([class  "col s12 m6"])
-                 (div ([class "card"])
-                   (canvas ([id "line-chart"]))
+              (div ([class  "col s12 m12"])
+                 (div ([class "card"] [style "margin: 8px 10%"])
+                   (canvas ([id "line-chart"] [height "120"]))
                    (p ([id "comportamiento_pagos_completo"] [hidden "true"]) " " ,(format "~a" comportamiento_pagos_completo))
                    (p ([id "comportamiento_amortizacion_completo"] [hidden "true"]) " " ,(format "~a" comportamiento_amortización_completo))
                    
                  )
                )
-              (div ([class  "card col s12 m6"])
-                   
-                   (canvas ([id "line-chart2"]))
+              (div ([class  "col s12 m12"])
+                 (div ([class "card"] [style "margin: 8px 10%"])
+                   (canvas ([id "line-chart2"] [height "120"]))
                    (p ([id "pagos_plazo_completo"] [hidden "true"]) " ",(format "~a" pagos_plazo_completo))
+                 )
                )
               (div ([class  "card col s12 m12 center-align"])
                    
@@ -206,7 +245,7 @@ var string_pagos = document.getElementById('comportamiento_pagos_completo').inne
   var array_pagos_tiempo = string_pagos_tiempo.split(' ');
 
   var indexes = [array_pagos.length];
-  var i = 1;
+  var i = 0;
   for(el in array_pagos){
     indexes[i] = i;
     i++;
@@ -266,7 +305,7 @@ var string_pagos = document.getElementById('comportamiento_pagos_completo').inne
     options: {
       title: {
         display: true,
-        text: 'Visualización de pagos a realizar con el tiempo en el periodo'
+        text: 'Visualización de plan de pagos en el periodo'
       },
       scales: {
           yAxes: [{
@@ -283,6 +322,10 @@ var string_pagos = document.getElementById('comportamiento_pagos_completo').inne
           }]
       }
     }
+  });
+  $(document).ready(function(){
+    // the 'href' attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
   });
 ")
          )))]
@@ -301,7 +344,7 @@ var string_pagos = document.getElementById('comportamiento_pagos_completo').inne
 (serve/servlet start
                #:servlet-regexp #rx""
                #:servlet-path "/"
-               #:listen-ip #f
-               #:port port
-               #:command-line? #t
+               ;#:listen-ip #f
+               ;#:port port
+               ;#:command-line? #t
                )
